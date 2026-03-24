@@ -24,7 +24,7 @@ public class LibroController {
         return libroService.saveLibro(libro);
     }
 
-    // Corregido: Tenías un carácter extraño "¨" antes de {id}
+
     @GetMapping("/{id}")
     public Libro buscarLibro(@PathVariable int id) {
         return libroService.getLibroId(id);
@@ -32,7 +32,7 @@ public class LibroController {
 
     @PutMapping("/{id}")
     public Libro actualizarLibro(@PathVariable int id, @RequestBody Libro libro) {
-        // Es buena práctica asegurar que el ID del objeto coincida con el de la URL
+
         libro.setId(id);
         return libroService.updateLibro(libro);
     }

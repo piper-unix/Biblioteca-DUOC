@@ -25,6 +25,7 @@ public class LibroRepository {
         }
         return null;
     }
+
     //buscar libro por su isbn
     public Libro buscarPorIsbn(String isbn) {
         for (Libro libro : listaLibros) {
@@ -34,16 +35,18 @@ public class LibroRepository {
         }
         return null;
     }
-    public Libro guardar(Libro lib){
+
+    public Libro guardar(Libro lib) {
         listaLibros.add(lib);
         return lib;
     }
-    public Libro actualizar(Libro lib){
+
+    public Libro actualizar(Libro lib) {
         int id = 0;
         int idPosicion = 0;
 
-        for (int i = 0; i<listaLibros.size();i++){
-            if (listaLibros.get(i).getId() == lib.getId()){
+        for (int i = 0; i < listaLibros.size(); i++) {
+            if (listaLibros.get(i).getId() == lib.getId()) {
                 id = lib.getId();
                 idPosicion = i;
             }
@@ -59,27 +62,10 @@ public class LibroRepository {
         listaLibros.set(idPosicion, libro1);
         return libro1;
     }
-    public void eliminar(int id){
-        //alternativa 1
-        Libro libro = buscarPorId(id);
-        if (libro != null){
-            listaLibros.remove(libro);
 
-        }
-        //alternativa 2
-        int idPosicion = 0;
-        for (int i = 0; i<listaLibros.size();i++){
-            if (listaLibros.get(i).getId() == id){
-                idPosicion = i;
-                break;
-            }
-        }
-         if (idPosicion > 0){
-             listaLibros.remove(idPosicion);
-        }
-
-        //alternativa 3
-        listaLibros.removeIf(x ->x.getId() == id);
+    //alternativa 3
+    public void eliminar(int id) {
+        listaLibros.removeIf(x -> x.getId() == id);
     }
 
     public LibroRepository() {
@@ -95,16 +81,26 @@ public class LibroRepository {
         listaLibros.add(new Libro(10, "9788474442571", "Una temporada en el infierno", "Hiperión", 1873, "Arthur Rimbaud"));
     }
 
-    public int totalLibros(){
+    //total de libros
+    public int totalLibros() {
         return listaLibros.size();
     }
-    public long contarLibrosPorAnio(int anio){ //contar libros por año
+
+    public long contarLibrosPorAnio(int anio) { //contar libros por año
         return listaLibros.stream()
-                .filter(libro -> libro.getAnioPublicacion() == anio)
+                .filter(libro -> libro.getFechaPublicacion() == anio)
                 .count();
     }
-    public List<Libro> buscarPorAutor(String autor){
-        return listaLibros.buscarPorAutos();
+
+    //buscar por autor
+    public List<Libro> buscarPorAutor(String autor) {
+        list<Libro> resultado = new ArrayList<>();
+        for (Libro libro : listaLibros) {
+            if (libro.getAutor().equalsIgnoreCase(autor)) {
+                resultado.add(libro);
+            }
+        }
+        return resultado;
     }
 }
 

@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data //generas getters y setters
+@Data //genera getters y setters
 @AllArgsConstructor//contructor para todos los campos
 @NoArgsConstructor
 public class Libro {
