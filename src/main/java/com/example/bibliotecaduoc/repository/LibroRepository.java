@@ -94,7 +94,7 @@ public class LibroRepository {
 
     //buscar por autor
     public List<Libro> buscarPorAutor(String autor) {
-        list<Libro> resultado = new ArrayList<>();
+        List<Libro> resultado = new ArrayList<>();
         for (Libro libro : listaLibros) {
             if (libro.getAutor().equalsIgnoreCase(autor)) {
                 resultado.add(libro);
@@ -102,5 +102,31 @@ public class LibroRepository {
         }
         return resultado;
     }
-}
 
+    public Libro libroMasAntiguo() {
+        Libro masAntiguo = listaLibros.get(0);
+        for (Libro libro : listaLibros) {
+            if (libro.getFechaPublicacion() < masAntiguo.getFechaPublicacion()) {
+                masAntiguo = libro;
+            }
+        }
+        return masAntiguo;
+    }
+
+    public Libro libroMasNuevo() {
+        Libro masNuevo = listaLibros.get(0);
+        for (Libro libro : listaLibros) {
+            if (libro.getFechaPublicacion() > masNuevo.getFechaPublicacion()) {
+                masNuevo = libro;
+            }
+
+        }
+        return masNuevo;
+    }
+
+    public List<Libro> librosPorAnioOrdenados() {
+        List<Libro> ordenados = new ArrayList<>(listaLibros);
+        ordenados.sort((a, b) -> a.getFechaPublicacion() - b.getFechaPublicacion());
+        return ordenados;
+    }
+}
